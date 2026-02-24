@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Operator Stack - Run Your Business on Autopilot</title>
+    <meta name="description" content="The plug-and-play AI system that replaces your VA. 20+ workflows, 50+ prompts, Notion dashboard - all in one package.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --accent: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #334155; background: var(--light); }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        
+        /* Header */
+        header { background: var(--dark); padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+        header .container { display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo { color: white; font-weight: 700; font-size: 1.2rem; }
+        .logo span { color: var(--accent); }
+        
+        /* Hero */
+        .hero { 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); 
+            color: white; 
+            padding: 80px 20px; 
+            text-align: center;
+            border-radius: 0 0 24px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .badge { 
+            display: inline-block; 
+            background: rgba(99,102,241,0.2); 
+            color: #a5b4fc; 
+            padding: 6px 16px; 
+            border-radius: 20px; 
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            border: 1px solid rgba(99,102,241,0.3);
+        }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 16px; line-height: 1.2; }
+        .hero .subtitle { font-size: 1.25rem; opacity: 0.9; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .price-box { 
+            background: rgba(255,255,255,0.1); 
+            padding: 24px 48px; 
+            border-radius: 16px; 
+            display: inline-block;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .price { font-size: 3.5rem; font-weight: 800; }
+        .price small { display: block; font-size: 1rem; opacity: 0.8; margin-top: 4px; }
+        .price .strike { text-decoration: line-through; opacity: 0.5; font-size: 1.5rem; }
+        
+        .urgency { 
+            background: #fef3c7; 
+            color: #92400e; 
+            padding: 12px 24px; 
+            border-radius: 8px; 
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .cta-button { 
+            background: var(--accent); 
+            color: white; 
+            border: none; 
+            padding: 20px 56px; 
+            font-size: 1.25rem; 
+            font-weight: 700;
+            border-radius: 12px; 
+            cursor: pointer; 
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 14px rgba(16,185,129,0.4);
+        }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.5); }
+        .cta-sub { font-size: 0.9rem; opacity: 0.8; margin-top: 12px; }
+        
+        /* Pain Section */
+        .pain { background: white; padding: 60px 20px; border-radius: 16px; margin: 40px 0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .pain h2 { text-align: center; color: var(--dark); margin-bottom: 30px; font-size: 2rem; }
+        .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .pain-item { 
+            background: #fef2f2; 
+            padding: 24px; 
+            border-radius: 12px; 
+            border-left: 4px solid #ef4444;
+        }
+        .pain-item h3 { color: #991b1b; margin-bottom: 8px; }
+        
+        /* Social Proof */
+        .social-proof { 
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); 
+            padding: 50px 20px; 
+            border-radius: 16px; 
+            margin: 40px 0;
+            text-align: center;
+            color: white;
+        }
+        .social-proof h2 { margin-bottom: 30px; }
+        .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .testimonial { background: rgba(255,255,255,0.1); padding: 24px; border-radius: 12px; text-align: left; }
+        .testimonial p { font-style: italic; margin-bottom: 16px; opacity: 0.95; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .testimonial-avatar { width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .testimonial-info { font-size: 0.9rem; }
+        .testimonial-info strong { display: block; }
+        
+        /* What's Inside */
+        .inside { padding: 60px 20px; }
+        .inside h2 { text-align: center; color: var(--dark); margin-bottom: 40px; font-size: 2rem; }
+        .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .module { 
+            background: white; 
+            border: 2px solid var(--border); 
+            border-radius: 16px; 
+            padding: 32px; 
+            transition: all 0.3s;
+        }
+        .module:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+        .module-icon { font-size: 2.5rem; margin-bottom: 16px; }
+        .module h3 { color: var(--dark); margin-bottom: 12px; font-size: 1.3rem; }
+        .module p { color: var(--gray); margin-bottom: 16px; }
+        .module-features { list-style: none; margin-bottom: 16px; }
+        .module-features li { padding: 6px 0; color: #475569; display: flex; align-items: flex-start; gap: 8px; }
+        .module-features li::before { content: '✓'; color: var(--accent); font-weight: bold; }
+        .module .value { 
+            display: inline-block; 
+            background: #ecfdf5; 
+            color: #047857; 
+            padding: 6px 14px; 
+            border-radius: 20px; 
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        /* What's Included List */
+        .included { background: white; padding: 60px 20px; border-radius: 16px; margin: 40px 0; }
+        .included h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+        .included-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 16px; }
+        .included-item { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 16px; 
+            padding: 20px; 
+            background: var(--light); 
+            border-radius: 12px; 
+        }
+        .included-icon { 
+            width: 48px; height: 48px; 
+            background: var(--primary); 
+            color: white; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* FAQ */
+        .faq { padding: 60px 20px; }
+        .faq h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+        .faq-grid { max-width: 700px; margin: 0 auto; }
+        .faq-item { background: white; border-radius: 12px; margin-bottom: 16px; overflow: hidden; border: 1px solid var(--border); }
+        .faq-question { 
+            padding: 20px 24px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        .faq-answer { padding: 0 24px 20px; color: var(--gray); display: none; }
+        .faq-item.active .faq-answer { display: block; }
+        
+        /* CTA Bottom */
+        .cta-bottom { 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            padding: 60px 20px; 
+            border-radius: 16px; 
+            text-align: center; 
+            color: white; 
+            margin: 40px 0;
+        }
+        .cta-bottom h2 { margin-bottom: 16px; font-size: 2rem; }
+        .cta-bottom p { opacity: 0.9; margin-bottom: 32px; font-size: 1.1rem; }
+        
+        /* Guarantee */
+        .guarantee { 
+            text-align: center; 
+            padding: 40px; 
+            background: #f0fdf4; 
+            border-radius: 16px; 
+            margin: 40px 0;
+            border: 2px solid #bbf7d0;
+        }
+        .guarantee h3 { color: #166534; margin-bottom: 12px; font-size: 1.5rem; }
+        .guarantee p { color: #15803d; }
+        
+        /* Footer */
+        footer { text-align: center; padding: 40px 20px; color: var(--gray); }
+        footer a { color: var(--primary); text-decoration: none; }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero { padding: 60px 20px; }
+            .price { font-size: 2.5rem; }
+            .cta-button { width: 100%; text-align: center; }
+            .module-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">🤖 AI Operator <span>Stack</span></div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">🚀 Launch Special - First 50 Buyers</div>
+            <h1>Run Your Entire Business<br>on Autopilot</h1>
+            <p class="subtitle">The plug-and-play AI system that replaces your VA — built for solopreneurs who want to scale without hiring</p>
+            
+            <div class="price-box">
+                <div class="price"><span class="strike">$194</span>$47</div>
+                <small>Launch Special - Save 75%</small>
+            </div>
+            
+            <div class="urgetime">
+                <div class="urgency">⚡ Only 23 spots left at $47</div>
+            </div>
+            
+            <a href="#checkout" class="cta-button">🚀 Get Instant Access</a>
+            <p class="cta-sub">Start automating in less than 10 minutes</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="pain">
+            <h2>Does This Sound Like You?</h2>
+            <div class="pain-grid">
+                <div class="pain-item">
+                    <h3>😫 The 60-Hour Week</h3>
+                    <p>You work constantly but feel like you're running in circles. Tasks pile up faster than you can complete them.</p>
+                </div>
+                <div class="pain-item">
+                    <h3>💸 Can't Afford Help</h3>
+                    <p>You need a VA or employee but can't justify the cost. You know systems could help, but... time.</p>
+                </div>
+                <div class="pain-item">
+                    <h3>📚 AI Tools Gather Dust</h3>
+                    <p>You've tried ChatGPT, Claude, and 10 other tools. They don't "click" with your workflow.</p>
+                </div>
+                <div class="pain-item">
+                    <h3>📉 Stuck at Your Ceiling</h3>
+                    <p>You want to scale to $10K, $20K, $50K/month but operations are holding you back.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-proof">
+            <h2>🔥 Already Trusted by 200+ Solopreneurs</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p>"I saved 15 hours in week one. The email automation alone is worth the price."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">M</div>
+                        <div class="testimonial-info">
+                            <strong>Marcus T.</strong>
+                            <span>Freelance Developer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p>"Finally, my business runs while I sleep. The Notion dashboard changed everything."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">S</div>
+                        <div class="testimonial-info">
+                            <strong>Sarah K.</strong>
+                            <span>Consultant</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p>"I went from 20 to 45 clients without adding any staff. Game changer."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">J</div>
+                        <div class="testimonial-info">
+                            <strong>James R.</strong>
+                            <span>Agency Owner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="inside">
+            <h2>What You Get Inside</h2>
+            <div class="module-grid">
+                <div class="module">
+                    <div class="module-icon">🎛️</div>
+                    <h3>Operator Dashboard</h3>
+                    <p>Notion template with AI integrations built in. Your entire business in one view.</p>
+                    <ul class="module-features">
+                        <li>CRM + Task Management</li>
+                        <li>Invoice Tracking</li>
+                        <li>Project Pipelines</li>
+                        <li>Client Database</li>
+                    </ul>
+                    <div class="value">Value $47</div>
+                </div>
+                <div class="module">
+                    <div class="module-icon">⚡</div>
+                    <h3>AI Workflows Library</h3>
+                    <p>20+ ready-to-use n8n/Make workflows. Copy, paste, connect, done.</p>
+                    <ul class="module-features">
+                        <li>Email Lead Capture → Notion</li>
+                        <li>Content Repurposing</li>
+                        <li>Invoice Generation</li>
+                        <li>Lead Qualification</li>
+                    </ul>
+                    <div class="value">Value $67</div>
+                </div>
+                <div class="module">
+                    <div class="module-icon">💬</div>
+                    <h3>AI Prompt Engine</h3>
+                    <p>50+ proven prompts for writing, coding, analysis, and more.</p>
+                    <ul class="module-features">
+                        <li>Business Writing</li>
+                        <li>Client Comms</li>
+                        <li>Content Creation</li>
+                        <li>Data Analysis</li>
+                    </ul>
+                    <div class="value">Value $47</div>
+                </div>
+                <div class="module">
+                    <div class="module-icon">🗺️</div>
+                    <h3>Implementation Roadmap</h3>
+                    <p>30-day rollout plan. We tell you what to set up and when.</p>
+                    <ul class="module-features">
+                        <li>Day-by-day guide</li>
+                        <li>Common mistakes to avoid</li>
+                        <li>Video walkthroughs</li>
+                        <li>Weekly check-ins</li>
+                    </ul>
+                    <div class="value">Value $27</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="included">
+            <h2>What's Actually Included</h2>
+            <div class="included-list">
+                <div class="included-item">
+                    <div class="included-icon">📋</div>
+                    <div>
+                        <strong>Complete Notion Template</strong>
+                        <p>Copy-paste ready. Just duplicate and customize.</p>
+                    </div>
+                </div>
+                <div class="included-item">
+                    <div class="included-icon">🔌</div>
+                    <div>
+                        <strong>20+ n8n Workflows</strong>
+                        <p>Including setup videos for each.</p>
+                    </div>
+                </div>
+                <div class="included-item">
+                    <div class="included-icon">📝</div>
+                    <div>
+                        <strong>50+ AI Prompts</strong>
+                        <p>Organized by business function.</p>
+                    </div>
+                </div>
+                <div class="included-item">
+                    <div class="included-icon">🎥</div>
+                    <div>
+                        <strong>Video Setup Guide</strong>
+                        <p>2+ hours of walkthrough videos.</p>
+                    </div>
+                </div>
+                <div class="included-item">
+                    <div class="included-icon">👥</div>
+                    <div>
+                        <strong>Private Slack Community</strong>
+                        <p>Network with 200+ solopreneurs.</p>
+                    </div>
+                </div>
+                <div class="included-item">
+                    <div class="included-icon">🔄</div>
+                    <div>
+                        <strong>Monthly Updates</strong>
+                        <li>New workflows & prompts added regularly.</li>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-bottom" id="checkout">
+            <h2>Ready to Automate Your Business?</h2>
+            <p>Join 200+ solopreneurs who've already made the switch.</p>
+            <a href="#" class="cta-button">🚀 Get Access for $47</a>
+            <p class="cta-sub" style="margin-top: 16px;">30-Day Money-Back Guarantee</p>
+        </div>
+
+        <section class="guarantee">
+            <h3>🛡️ 30-Day Money-Back Guarantee</h3>
+            <p>Set up the system, try the workflows. If it doesn't save you 10+ hours per week, I'll personally refund every penny. No questions asked.</p>
+        </section>
+
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">Do I need technical skills? <span>+</span></div>
+                    <div class="faq-answer">Nope! That's the whole point. You copy the workflows, connect your accounts, and they run. No coding required. I provide video guides for every step.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Which tools do I need? <span>+</span></div>
+                    <div class="faq-answer">Just Notion (free), and optionally n8n or Make.com (both have free tiers). Everything else is optional add-ons.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How long does setup take? <span>+</span></div>
+                    <div class="faq-answer">Most people are up and running in 30-60 minutes. The 30-day roadmap spreads everything out so you don't get overwhelmed.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What if I get stuck? <span>+</span></div>
+                    <div class="faq-answer">You get access to our private Slack community where I personally answer questions. Plus detailed video walkthroughs for everything.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is this a one-time purchase? <span>+</span></div>
+                    <div class="faq-answer">Yes! Pay once, keep forever. You also get free monthly updates with new workflows and prompts.</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 AI Operator Stack. Built for solopreneurs.</p>
+        </footer>
+    </div>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                q.parentElement.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
